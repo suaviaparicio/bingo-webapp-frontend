@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet } from 'react-router-dom';
-import Header from '../pages/Shared/Header';
-
+import Header from '../pages/shared/Header';
 
 const HomeLayout = () => {
     return (
@@ -11,5 +10,4 @@ const HomeLayout = () => {
         </div>
     );
 };
-
 export default HomeLayout;
