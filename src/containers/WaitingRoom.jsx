@@ -13,7 +13,7 @@ const WaitingRoom = () => {
                     </div>
                 </div>
                 <div className="pt-5">
-                    <h3 className="text-center">No tardaremos, solo estamos esperando a que ingresen más usuarios...</h3>
+                    <h3 className="text-center">No tardaremos, solo estamos esperando a que ingresen más jugadores...</h3>
                 </div>
 
             </div>
