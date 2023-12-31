@@ -15,7 +15,7 @@ const Header = () => {
                         </li>
                     </ul>
                     <span className="navbar-text">
-                       ¡ Bienvenido !
+                       ¡ Bienvenido XXX XXX!
                     </span>
                 </div>
             </div>

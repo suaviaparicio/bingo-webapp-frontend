@@ -5,8 +5,8 @@ const Auth = () => {
         <div className="container">
             <div className="row mt-5">
                 <h1 className="text-center mb-3">¡Bienvenido a nuestro Bingo virtual!</h1>
-                <h3 className="text-center mb-5">Estás a punto de tener una experiencia inolvidable con el mejor juego de todos.</h3>
-                <h4 className="text-center">Para continuar, debes ingresar tu correo electrónico a continuación para iniciar el juego</h4>
+                <h3 className="text-center mb-5">Estás a punto de tener una experiencia inolvidable con el juego más divertido.</h3>
+                <h4 className="text-center">Para continuar, debes ingresar tu correo electrónico para iniciar el juego</h4>
 
             </div>
             <div className="row mt-5">

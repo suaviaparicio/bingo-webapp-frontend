@@ -11,13 +11,13 @@ const Home = () => {
                     ¡Estamos  muy contentos de que nos acompañes!
                 </h2>
                 <h5 className="fw-light">
-                    A continuación encontrarás el reglamento para jugar:
+                    Antes de iniciar, es importante que leas las instrucciones a continuación:
                     <ul>
                         <li>Al presionar 'iniciar juego', serás dirigido a una sala donde esperarás máximo 1 minuto a que otros jugadores se sumen a la partida</li>
                         <li>Luego podrás generar un tarjetón</li>
                         <li>Cuando el juego inicie, leeremos los números uno por uno cada 5 segundos</li>
                         <li>Si los números coinciden con los de tu tarjetón, debes marcarlos haciendo clic sobre el recuadro del número sobre tu tarjetón.</li>
-                        <li>Ganarás, en caso de completar algunas de las siguientes opciones. </li>
+                        <li>Ganarás, en caso de que completes alguna de las siguientes opciones: </li>
                             <ul>
                                 <li>Una línea vertical</li>
                                 <li>Una línea horizontal</li>

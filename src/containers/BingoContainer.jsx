@@ -1,6 +1,6 @@
 import React from "react";
 
-const BingoContainer = () => {
+const GameBingo = () => {
     return(
         <div>
 
@@ -8,4 +8,4 @@ const BingoContainer = () => {
     );
 };
 
-export default BingoContainer;
+export default GameBingo;
