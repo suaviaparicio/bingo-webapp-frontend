@@ -14,6 +14,7 @@ const WaitingRoom = () => {
                 </div>
                 <div className="pt-5">
                     <h3 className="text-center">No tardaremos, solo estamos esperando a que ingresen más jugadores...</h3>
+                    <h3 className="text-center mt-5">Cuando ingreses, generaremos tu tarjetón</h3>
                 </div>
 
             </div>

@@ -1,27 +1,32 @@
 import React from "react";
 import BingoCard from "../components/BingoCard";
+import OutgoingBallots from "../components/OutgoingBallots";
+import RoomPlayers from "../components/RoomPlayers";
 
 const GameBingo = () => {
     return(
         <div className="container">
             <div className="row">
-                <div className="col-8 mt-5">
+                <div className="col-7 mt-5">
                     <div className="row">
-                        <h4 className="">Balotas salientes</h4>
-                        <h2 className="">x, x, x...</h2>
+                        <OutgoingBallots/>
                     </div>
                     <div className="row mt-5">
                         <div className="col-8">
                             <BingoCard/>
                         </div>
-                        <div className="col-4">
-                            <button type="button" className="btn btn-success btn-lg">BINGO!</button>
-                        </div>
                     </div>
 
                 </div>
-                <div className="col-4 mt-5">
-                    <h2>Jugadores en la sala</h2>
+
+                <div className="col-1 mt-5">
+                    <button type="button" className="btn btn-success btn-lg position-absolute top-50 start-50 translate-middle">
+                        ¡BINGO!
+                    </button>
+                </div>
+
+                <div className="col-4 mt-5 position-relative">
+                    <RoomPlayers/>
                 </div>
             </div>
 

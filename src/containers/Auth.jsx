@@ -22,8 +22,8 @@ const Auth = () => {
                         <label className="form-label" htmlFor="InputPassword">Contraseña</label>
                         <input className="form-control" type="password" id="passwordInput"/>
                     </div>
-                    <div className="start-button d-grid gap-2 col-6 mx-auto">
-                        <button type="submit" className="btn btn-info">Enviar</button>
+                    <div className="start-button">
+                        <button type="submit" className="btn btn-success">Enviar</button>
                     </div>
                 </form>
 

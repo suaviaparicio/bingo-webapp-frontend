@@ -2,8 +2,8 @@
 
 
 .spinner{
-    width: 5rem;
-    height: 5rem;
+    width: 4.5rem;
+    height: 4.5rem;
 }
 
 .bingo-card {
@@ -11,10 +11,32 @@
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-gap: 5px;
+    margin: 20px;
+    
+    
+  }
+
+.bingo-column {
+    display: flex;
+    flex-direction: column;
+  } 
+
+.bingo-row {
+    display: block;
+    
   }
   
-  .bingo-cell {
+.bingo-cell {
     flex: 1;
     border: 1px solid black;
     height: 80px;
+  }
+
+.bingo-header-cell {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .marked-cell {
+    background-color: #aaf2aa; 
   }
