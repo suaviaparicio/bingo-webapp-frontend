@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+// import boardMock from "../data/boardMock.json";
 
 const BingoCard = () => {
     const [bingoData, setBingoData] = useState({});
     const [markedCells, setMarkedCells] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const endpointUrl = process.env.REACT_APP_ENDPOINT_URL;
 
     useEffect(() => {
-        fetch('http://192.168.5.73:3000/api/generate-card', {
+        fetch(`${endpointUrl}/api/generate-card`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -17,7 +19,7 @@ const BingoCard = () => {
         })
         .then(response => {
             if (!response.ok) {
-                //throw new Error(⁠ HTTP error! Status: ${response.status} ⁠);
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
             return response.json();
         })
@@ -42,6 +44,7 @@ const BingoCard = () => {
     };
 
     const rows = Object.entries(bingoData).map(([letter, numbers], rowIndex) => (
+        // const rows = Object.entries(boardMock).map(([letter, numbers], rowIndex) => (
         <div key={rowIndex} className="bingo-row">
             <div className="bingo-cell bingo-header-cell">{letter}</div>
             {numbers.map((value, cellIndex) => {

@@ -10,9 +10,9 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarText">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <a className="nav-link active" aria-current="page" href="/home">Home</a>
-                        </li>
+                        </li> */}
                     </ul>
                     <span className="navbar-text">
                        ¡ Bienvenido XXX XXX!

@@ -1,6 +1,25 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 const WaitingRoom = () => {
+    const navigate = useNavigate();
+    const endpointUrl = process.env.REACT_APP_ENDPOINT_URL;
+
+    const handleStartGame = async () => {
+        try {
+            const response = await fetch(`${endpointUrl}/api/start-game`);
+
+            if (response.data.success) {
+                navigate('/waiting-room');
+            } else {
+                console.error('Starting game failed');
+            }
+        } catch (error) {
+            console.error('Error during starting game:', error);
+        }
+    };
+
+
     return (
         <div className="container">
             <div className="row pt-5 pb-5">

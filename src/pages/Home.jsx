@@ -1,25 +1,24 @@
 import React from "react";
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const navigate = useNavigate();
+    const endpointUrl = process.env.REACT_APP_ENDPOINT_URL;
+    const wsUrl = process.env.REACT_APP_WS_URL;
 
-    const handleStartGame = async () => {
+    const handleWaitingRoom = async () => {
         try {
-            const response = await axios.post('http://192.168.5.73:3000/api/start-game');
+            const response = await fetch(`${endpointUrl}/api/xxx`);
 
             if (response.data.success) {
                 navigate('/waiting-room');
             } else {
-                console.error('Starting game failed');
+                console.error('Error starting game');
             }
         } catch (error) {
-            console.error('Error during starting game:', error);
+            console.error('Error during waiting room:', error);
         }
     };
-
-
 
     return (
         <div className="container">
@@ -51,7 +50,7 @@ const Home = () => {
                     </ul>
                 </h5>
                 <div className="start-button d-grid gap-2 col-6 mx-auto pt-4 pb-3">
-                    <button type="button" className="btn btn-success btn-lg" onClick={handleStartGame}>Iniciar juego</button>
+                    <button type="button" className="btn btn-success btn-lg" onClick={handleWaitingRoom}>Iniciar juego</button>
                 </div>
             </div>
         </div>

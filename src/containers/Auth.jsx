@@ -1,68 +1,93 @@
-import React, { useState }  from "react";
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
-    const [email, setEmail] = useState('');
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
     const navigate = useNavigate();
+    const endpointUrl = process.env.REACT_APP_ENDPOINT_URL;
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-      };
+    const handleUserChange = (e) => {
+        setUser(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await axios.post('http://192.168.5.73:3000/api/authenticate', { email });
-      
-            if (response.data.success) {
-              navigate('/home');
-            } else {
-              console.error('Authentication failed');
-            }
-          } catch (error) {
-            console.error('Error during authentication:', error);
-          }
-        };
+       try {
+           const response = await fetch(`${endpointUrl}/api/auth`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "username": user,
+                    "password": password
+                })
+        });
+        if (!response.ok) {
+            setShowErrorAlert(true);
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        navigate('/home');
+        } catch(error) {
+            setError(error.message);
+            setShowErrorAlert(true);
+        }
+    };
 
+    useEffect(() => {
+    }, []);
 
     return (
         <div className="container">
             <div className="row mt-5">
                 <h1 className="text-center mb-3">¡Bienvenido a nuestro Bingo virtual!</h1>
-                <h3 className="text-center mb-5">Estás a punto de tener una experiencia inolvidable con el juego más divertido.</h3>
-                <h4 className="text-center">Para continuar, debes ingresar tu correo electrónico para iniciar el juego</h4>
-
+                <h3 className="text-center mb-5">Inicia sesión para tener una experiencia inolvidable con el juego más divertido.</h3>
             </div>
             <div className="row mt-5">
                 <form action="" onSubmit={handleFormSubmit}>
+                    {showErrorAlert && (
+                        <div className="alert alert-danger" role="alert">
+                            Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.
+                        </div>
+                    )}
                     <div className="mb-3">
                         {/* Revisar el 'htmlFor', en Bootstrap utiliza 'for' */}
-                        <label className="form-label" htmlFor="InputEmail1">Correo electrónico</label>
+                        <label className="form-label" htmlFor="InputUser">Usuario</label>
+                        <input
+                            className="form-control"
+                            type="text"
+                            id="userInput"
+                            aria-describedby="emailHelp"
+                            value={user}
+                            onChange={handleUserChange}
+                        />
+                        <div id="emailHelp" class="form-text">*No compartiremos tu email ni tus datos personales con ningún tercero</div>
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="InputPassword">Contraseña</label>
                         <input 
                             className="form-control" 
-                            type="email" 
-                            id="emailInput" 
-                            aria-describedby="emailHelp"
-                            value={email}
-                            onChange={handleEmailChange}
+                            type="password" 
+                            id="passwordInput" 
+                            onChange={handlePasswordChange}
                         />
-                        <div id="emailHelp" class="form-text">No compartiremos tu email ni tus datos personales con ningún tercero</div>
                     </div>
-                    {/* <div className="mb-3">
-                        <label className="form-label" htmlFor="InputPassword">Contraseña</label>
-                        <input className="form-control" type="password" id="passwordInput"/>
-                    </div> */}
                     <div className="start-button">
-                        <button type="submit" className="btn btn-success">Enviar</button>
+                        <button type="submit" className="btn btn-success mt-3">Iniciar sesión</button>
                     </div>
                 </form>
-
             </div>
-
         </div>
     );
 };
-
 export default Auth;

@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
-import axios from 'axios';
 import BingoCard from "../components/BingoCard";
-import OutgoingBallots from "../components/OutgoingBallots";
+import DrawnNumberDisplay from "../components/DrawnNumberDisplay";
 import RoomPlayers from "../components/RoomPlayers";
 
+const wsUrl = process.env.REACT_APP_WS_URL;
 
 const BingoContainer = () => {
+    
     return (
         <div className="container">
             <div className="row">
                 <div className="col-7 mt-5">
                     <div className="row">
-                        <OutgoingBallots />
+                        <DrawnNumberDisplay websocketUrl={wsUrl} />
                     </div>
                     <div className="row mt-5">
                         <div className="col-8">
@@ -22,11 +23,10 @@ const BingoContainer = () => {
                 </div>
 
                 <div className="col-1 mt-5">
-                    <button type="button" className="btn btn-success btn-lg position-absolute top-50 start-50 translate-middle">
+                    <button type="button" className="btn btn-warning btn-lg position-absolute top-50 start-50">
                         ¡BINGO!
                     </button>
                 </div>
-
                 <div className="col-4 mt-5 position-relative">
                     <RoomPlayers />
                 </div>
