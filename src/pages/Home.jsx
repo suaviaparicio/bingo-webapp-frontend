@@ -1,6 +1,26 @@
 import React from "react";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    const handleStartGame = async () => {
+        try {
+            const response = await axios.post('http://192.168.5.73:3000/api/start-game');
+
+            if (response.data.success) {
+                navigate('/waiting-room');
+            } else {
+                console.error('Starting game failed');
+            }
+        } catch (error) {
+            console.error('Error during starting game:', error);
+        }
+    };
+
+
+
     return (
         <div className="container">
             <div className="home pt-5 ">
@@ -18,20 +38,20 @@ const Home = () => {
                         <li className="list-group-item">Si los números coinciden con los de tu tarjetón, debes marcarlos haciendo clic sobre el recuadro del número sobre tu tarjetón.</li>
                         <li className="list-group-item">Ganarás, en caso de que completes alguna de las siguientes opciones: </li>
 
-                            <ul className="list-group mt-4 mb-4">
-                                <li className="list-group-item list-group-item-info">Una línea vertical</li>
-                                <li className="list-group-item list-group-item-warning">Una línea horizontal</li>
-                                <li className="list-group-item list-group-item-success">Una diagonal en cualquier dirección</li>
-                                <li className="list-group-item list-group-item-dark">Las cuatro esquinas del tarjetón</li>
-                                <li className="list-group-item list-group-item-danger">Todo el tarjetón</li>
-                            </ul>
+                        <ul className="list-group mt-4 mb-4">
+                            <li className="list-group-item list-group-item-info">Una línea vertical</li>
+                            <li className="list-group-item list-group-item-warning">Una línea horizontal</li>
+                            <li className="list-group-item list-group-item-success">Una diagonal en cualquier dirección</li>
+                            <li className="list-group-item list-group-item-dark">Las cuatro esquinas del tarjetón</li>
+                            <li className="list-group-item list-group-item-danger">Todo el tarjetón</li>
+                        </ul>
 
                         <li className="list-group-item">Debes presionar el botón de 'Bingo', para indicar que ganaste y validaremos tus respuestas</li>
                         <li className="list-group-item">¡Cuidado! en caso de que presiones el botón 'Bingo' y no hayas ganado, quedarás descalificado de la partida</li>
                     </ul>
                 </h5>
                 <div className="start-button d-grid gap-2 col-6 mx-auto pt-4 pb-3">
-                    <button type="button" className="btn btn-success btn-lg">Iniciar juego</button>
+                    <button type="button" className="btn btn-success btn-lg" onClick={handleStartGame}>Iniciar juego</button>
                 </div>
             </div>
         </div>

@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState }  from "react";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
+    const [email, setEmail] = useState('');
+    const navigate = useNavigate();
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+      };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('http://192.168.5.73:3000/api/authenticate', { email });
+      
+            if (response.data.success) {
+              navigate('/home');
+            } else {
+              console.error('Authentication failed');
+            }
+          } catch (error) {
+            console.error('Error during authentication:', error);
+          }
+        };
+
+
     return (
         <div className="container">
             <div className="row mt-5">
@@ -10,18 +36,24 @@ const Auth = () => {
 
             </div>
             <div className="row mt-5">
-                <form action="">
+                <form action="" onSubmit={handleFormSubmit}>
                     <div className="mb-3">
                         {/* Revisar el 'htmlFor', en Bootstrap utiliza 'for' */}
                         <label className="form-label" htmlFor="InputEmail1">Correo electrónico</label>
-                        <input className="form-control" type="email" id="emailInput" aria-describedby="emailHelp"/>
+                        <input 
+                            className="form-control" 
+                            type="email" 
+                            id="emailInput" 
+                            aria-describedby="emailHelp"
+                            value={email}
+                            onChange={handleEmailChange}
+                        />
                         <div id="emailHelp" class="form-text">No compartiremos tu email ni tus datos personales con ningún tercero</div>
                     </div>
-                    <div className="mb-3">
-                        {/* Revisar el 'htmlFor', en Bootstrap utiliza 'for' */}
+                    {/* <div className="mb-3">
                         <label className="form-label" htmlFor="InputPassword">Contraseña</label>
                         <input className="form-control" type="password" id="passwordInput"/>
-                    </div>
+                    </div> */}
                     <div className="start-button">
                         <button type="submit" className="btn btn-success">Enviar</button>
                     </div>
@@ -32,4 +64,5 @@ const Auth = () => {
         </div>
     );
 };
+
 export default Auth;

@@ -1,8 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const BingoCard = () => {
-    // const letters = ['B', 'I', 'N', 'G', 'O'];
+    const [bingoData, setBingoData] = useState({});
     const [markedCells, setMarkedCells] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch('http://192.168.5.73:3000/api/generate-card', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            // body: JSON.stringify({ /* payload data */ })
+        })
+        .then(response => {
+            if (!response.ok) {
+                //throw new Error(⁠ HTTP error! Status: ${response.status} ⁠);
+            }
+            return response.json();
+        })
+        .then(data => {
+            setBingoData(data);
+        })
+        .catch(error => setError(error))
+        .finally(() => setIsLoading(false));
+    }, []);
 
     const handleCellClick = (rowIndex, cellIndex) => {
         const newMarkedCells = [...markedCells];
@@ -17,34 +41,10 @@ const BingoCard = () => {
         setMarkedCells(newMarkedCells);
     };
 
-    // const headerRow = (
-    // <div className="bingo-row">
-    //     {letters.map((letter, index) => (
-    //     <div key={index} className="bingo-cell bingo-header-cell">
-    //         {letter}
-    //     </div>
-    //     ))}
-    // </div>
-    // );
-
-    // const rows = Array.from({ length: 5 }, (_, rowIndex) => (
-    //     <div key={rowIndex} className="bingo-row">
-    //         {Array.from({ length: 6 }, (_, cellIndex) => (
-    //             <div key={cellIndex} className="bingo-cell"></div>
-    //         ))}
-    //     </div>
-    // ));
-
-    // return (
-    //     <div className="bingo-card">
-    //         {/* {headerRow} */}
-    //         {rows}
-    //     </div>
-    // );
-
-    const rows = Array.from({ length: 5 }, (_, rowIndex) => (
+    const rows = Object.entries(bingoData).map(([letter, numbers], rowIndex) => (
         <div key={rowIndex} className="bingo-row">
-            {Array.from({ length: 5 }, (_, cellIndex) => {
+            <div className="bingo-cell bingo-header-cell">{letter}</div>
+            {numbers.map((value, cellIndex) => {
                 const cellKey = `${rowIndex}-${cellIndex}`;
                 const isMarked = markedCells.includes(cellKey);
 
@@ -53,7 +53,9 @@ const BingoCard = () => {
                         key={cellIndex}
                         className={`bingo-cell ${isMarked ? 'marked-cell' : ''}`}
                         onClick={() => handleCellClick(rowIndex, cellIndex)}
-                    ></div>
+                    >
+                        {value}
+                    </div>
                 );
             })}
         </div>
@@ -61,6 +63,5 @@ const BingoCard = () => {
 
     return <div className="bingo-card">{rows}</div>;
 };
-
 
 export default BingoCard;
