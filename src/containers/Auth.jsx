@@ -21,24 +21,26 @@ const Auth = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-       try {
-           const response = await fetch(`${endpointUrl}/api/auth`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(
-                {
-                    "username": user,
-                    "password": password
-                })
-        });
-        if (!response.ok) {
-            setShowErrorAlert(true);
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        navigate('/home');
-        } catch(error) {
+        try {
+            const response = await fetch(`${endpointUrl}/api/auth`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        "username": user,
+                        "password": password
+                    })
+            });
+            if (!response.ok) {
+                setShowErrorAlert(true);
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data);
+            navigate('/home');
+        } catch (error) {
             setError(error.message);
             setShowErrorAlert(true);
         }
@@ -71,14 +73,14 @@ const Auth = () => {
                             value={user}
                             onChange={handleUserChange}
                         />
-                        <div id="emailHelp" class="form-text">*No compartiremos tu email ni tus datos personales con ningún tercero</div>
+                        <div id="emailHelp" className="form-text">*No compartiremos tu email ni tus datos personales con ningún tercero</div>
                     </div>
                     <div className="mb-3">
                         <label className="form-label" htmlFor="InputPassword">Contraseña</label>
-                        <input 
-                            className="form-control" 
-                            type="password" 
-                            id="passwordInput" 
+                        <input
+                            className="form-control"
+                            type="password"
+                            id="passwordInput"
                             onChange={handlePasswordChange}
                         />
                     </div>

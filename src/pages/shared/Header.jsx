@@ -4,6 +4,10 @@ import { AuthContext } from '../../AuthContext';
 const Header = () => {
     const { authData, setAuthData } = useContext(AuthContext);
 
+    if (authData === null) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div className="container-fluid">

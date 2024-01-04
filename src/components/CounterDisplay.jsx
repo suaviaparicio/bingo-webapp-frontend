@@ -31,9 +31,9 @@ const CounterDisplay = ({websocketUrl}) => {
     }, [websocketUrl]);
 
     return (
-        <div className="container">
+        <div className="container text-center">
             {counter !== null ? (
-                <h1 className="text-center">
+                <h1>
                     El juego iniciará en {counter} segundos...
                 </h1>
             ) : (
