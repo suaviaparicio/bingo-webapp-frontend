@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import BingoCard from "../components/BingoCard";
 import DrawnNumberDisplay from "../components/DrawnNumberDisplay";
 import RoomPlayers from "../components/RoomPlayers";
+// import { AuthContext } from "../AuthContext";
 
 const wsUrl = process.env.REACT_APP_WS_URL;
 
 const BingoContainer = () => {
+    // const { authData, setAuthData } = useContext(AuthContext);
     
     return (
         <div className="container">

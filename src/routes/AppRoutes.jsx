@@ -6,11 +6,9 @@ import Home from '../pages/Home';
 import WaitingRoom from '../containers/WaitingRoom';
 import BingoContainer from '../containers/BingoContainer';
 
-
 const AppRoutes = () => (
-    <Routes>    
+    <Routes>
         <Route path='/' element={<Auth />} />
-
         <Route path="/home" element={<HomeLayout />}>
             <Route index element={<Home />} />
             <Route path="waiting-room" element={<WaitingRoom />} />

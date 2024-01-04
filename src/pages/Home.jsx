@@ -4,14 +4,18 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const navigate = useNavigate();
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL;
-    const wsUrl = process.env.REACT_APP_WS_URL;
 
     const handleWaitingRoom = async () => {
         try {
-            const response = await fetch(`${endpointUrl}/api/xxx`);
+            const response = await fetch(`${endpointUrl}/api/start-counter`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
-            if (response.data.success) {
-                navigate('/waiting-room');
+            if (response.ok) {
+                navigate('/home/waiting-room');
             } else {
                 console.error('Error starting game');
             }

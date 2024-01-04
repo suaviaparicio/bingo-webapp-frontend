@@ -4,9 +4,9 @@ import AppRoutes from './routes/AppRoutes';
 import './assets/css/style.css';
 
 const App = () => (
-  <Router>
-    <AppRoutes />
-  </Router>
+    <Router>
+      <AppRoutes />
+    </Router>
 );
 
 export default App;

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { AuthContext } from '../../AuthContext';
 
 const Header = () => {
+    const { authData, setAuthData } = useContext(AuthContext);
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div className="container-fluid">
@@ -15,7 +18,7 @@ const Header = () => {
                         </li> */}
                     </ul>
                     <span className="navbar-text">
-                       ¡ Bienvenido XXX XXX!
+                       ¡ Bienvenido {authData.user}!
                     </span>
                 </div>
             </div>
