@@ -22,7 +22,6 @@ const RoomPlayers = () => {
                         } else {
                             console.error('Invalid data structure: missing or invalid activeUsers property');
                         }
-                        // setUsers(data);
                     } else {
                         console.error('Error getting active users');
                     }

@@ -14,7 +14,6 @@ const BingoCard = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-
             // body: JSON.stringify({ /* payload data */ })
         })
         .then(response => {

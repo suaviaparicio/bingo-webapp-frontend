@@ -3,14 +3,12 @@ import BingoCard from "../components/BingoCard";
 import DrawnNumberDisplay from "../components/DrawnNumberDisplay";
 import RoomPlayers from "../components/RoomPlayers";
 import { useNavigate } from "react-router-dom";
-// import { AuthContext } from "../AuthContext";
 
 const wsUrl = process.env.REACT_APP_WS_URL;
 
 const BingoContainer = () => {
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL;
     const navigate = useNavigate();
-    // const { authData, setAuthData } = useContext(AuthContext);
 
     const handleCheckWin = async () => {
         try {

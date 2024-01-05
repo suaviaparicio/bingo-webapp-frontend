@@ -22,7 +22,7 @@ const Header = () => {
                         </li> */}
                     </ul>
                     <span className="navbar-text">
-                       ¡ Bienvenido {authState.user}!
+                       ¡ Hola {authState.user}!
                     </span>
                 </div>
             </div>
