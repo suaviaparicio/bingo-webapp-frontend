@@ -6,6 +6,8 @@ import Home from '../pages/Home';
 import WaitingRoom from '../containers/WaitingRoom';
 import BingoContainer from '../containers/BingoContainer';
 import GameFinished from '../containers/GameFinished';
+import Disqualified from '../containers/Disqualified';
+
 
 const AppRoutes = () => (
     <Routes>
@@ -15,6 +17,7 @@ const AppRoutes = () => (
             <Route path="waiting-room" element={<WaitingRoom />} />
             <Route path="bingo-game" element={<BingoContainer />} />
             <Route path="game-finished" element={<GameFinished />} />
+            <Route path="disqualified" element={<Disqualified />} />
         </Route>
     </Routes>
 );

@@ -19,7 +19,7 @@ const CounterDisplay = ({websocketUrl}) => {
                 const newCounter = JSON.parse(message.data);
                 setCounter(newCounter);
 
-                if (newCounter === 1) {
+                if (newCounter === 0) {
                     navigate("/home/bingo-game");
                 }
             }

@@ -24,6 +24,25 @@ const Home = () => {
         }
     };
 
+    const handleAddUser = async () => {
+        try {
+            const response = await fetch(`${endpointUrl}/api/add-user`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                navigate('/home/waiting-room');
+            } else {
+                console.error('Error adding a user');
+            }
+        } catch (error) {
+            console.error('Error adding a user:', error);
+        }
+    }
+
     return (
         <div className="container">
             <div className="home pt-5 ">
