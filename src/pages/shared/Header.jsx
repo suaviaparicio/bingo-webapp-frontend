@@ -2,9 +2,9 @@ import React, {useContext} from 'react';
 import { AuthContext } from '../../AuthContext';
 
 const Header = () => {
-    const { authData, setAuthData } = useContext(AuthContext);
+    const { authState, setAuthState} = useContext(AuthContext);
 
-    if (authData === null) {
+    if (authState === null) {
         return <div>Loading...</div>;
     }
 
@@ -22,7 +22,7 @@ const Header = () => {
                         </li> */}
                     </ul>
                     <span className="navbar-text">
-                       ¡ Bienvenido {authData.user}!
+                       ¡ Bienvenido {authState.user}!
                     </span>
                 </div>
             </div>

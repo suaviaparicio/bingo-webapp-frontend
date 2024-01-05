@@ -5,6 +5,7 @@ import Auth from '../containers/Auth';
 import Home from '../pages/Home';
 import WaitingRoom from '../containers/WaitingRoom';
 import BingoContainer from '../containers/BingoContainer';
+import GameFinished from '../containers/GameFinished';
 
 const AppRoutes = () => (
     <Routes>
@@ -13,6 +14,7 @@ const AppRoutes = () => (
             <Route index element={<Home />} />
             <Route path="waiting-room" element={<WaitingRoom />} />
             <Route path="bingo-game" element={<BingoContainer />} />
+            <Route path="game-finished" element={<GameFinished />} />
         </Route>
     </Routes>
 );

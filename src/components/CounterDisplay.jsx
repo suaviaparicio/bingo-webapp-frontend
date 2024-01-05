@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from "react";
+import { useNavigate } from"react-router-dom";
+
 
 const CounterDisplay = ({websocketUrl}) => {
     const [counter, setCounter ] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const ws = new WebSocket(websocketUrl);
@@ -13,7 +16,12 @@ const CounterDisplay = ({websocketUrl}) => {
         ws.onmessage = (event) => {
             const message = JSON.parse(event.data);
             if (message.type === 'COUNTER') {
-                setCounter(JSON.parse(message.data));
+                const newCounter = JSON.parse(message.data);
+                setCounter(newCounter);
+
+                if (newCounter === 1) {
+                    navigate("/home/bingo-game");
+                }
             }
         };
 
@@ -28,7 +36,7 @@ const CounterDisplay = ({websocketUrl}) => {
         return () => {
             ws.close();
         };
-    }, [websocketUrl]);
+    }, [websocketUrl, navigate]);
 
     return (
         <div className="container text-center">

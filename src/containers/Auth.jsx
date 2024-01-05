@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthContext';
 
 const Auth = () => {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const navigate = useNavigate();
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL;
+    const { updateAuthState } = useContext(AuthContext);
 
     const handleUserChange = (e) => {
         setUser(e.target.value);
@@ -20,34 +20,26 @@ const Auth = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const response = await fetch(`${endpointUrl}/api/auth`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(
-                    {
-                        "username": user,
-                        "password": password
-                    })
+                body: JSON.stringify({ username: user, password: password })
             });
-            if (!response.ok) {
+
+            if (response.ok) {
+                const data = await response.json();
+                updateAuthState({ isAuthenticated: true, user: data.user });
+                navigate('/home');
+            } else {
                 setShowErrorAlert(true);
-                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            const data = await response.json();
-            console.log(data);
-            navigate('/home');
         } catch (error) {
-            setError(error.message);
             setShowErrorAlert(true);
         }
     };
-
-    useEffect(() => {
-    }, []);
 
     return (
         <div className="container">
@@ -63,7 +55,6 @@ const Auth = () => {
                         </div>
                     )}
                     <div className="mb-3">
-                        {/* Revisar el 'htmlFor', en Bootstrap utiliza 'for' */}
                         <label className="form-label" htmlFor="InputUser">Usuario</label>
                         <input
                             className="form-control"

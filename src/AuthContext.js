@@ -1,20 +1,16 @@
 import React, { createContext, useState, useEffect } from 'react';
-
-export const AuthContext = createContext(null);
-
-
+ 
+export const AuthContext = createContext();
+ 
 export const AuthProvider = ({ children }) => {
-    const [authData, setAuthData] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
     const [authState, setAuthState] = useState({
         isAuthenticated: false,
         user: null,
         isLoading: true
-        //bingCard: null
     });
-    
+ 
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL;
-
+ 
     useEffect(() => {
         const checkSession = async () => {
             try {
@@ -24,38 +20,40 @@ export const AuthProvider = ({ children }) => {
                         'Content-Type': 'application/json'
                     },
                 });
-
+ 
                 if (response.ok) {
                     const data = await response.json();
-                    
+                    console.log(data.loggedIn);
                     if (data.loggedIn) {
-                        setAuthState(
-                            {
-                                isAuthenticated: true,
-                                user: data.user
-                            });
-                        
+                        setAuthState({
+                            isAuthenticated: true,
+                            isLoading: false,
+                            user: data.user
+                        });
+                    } else {
+                        setAuthState(prevState => ({ ...prevState, isLoading: false }));
                     }
                 } else {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-
             } catch (error) {
                 console.error('Error fetching data:', error.message);
-            } finally {
-                setIsLoading(false);
+                setAuthState(prevState => ({ ...prevState, isLoading: false }));
             }
-
         };
+ 
         checkSession();
     }, [endpointUrl]);
-
-    if (isLoading) {
-        return <div>...</div>;
-    }
-
+ 
+    const updateAuthState = (newState) => {
+        setAuthState({
+            ...newState,
+            isLoading: false
+        });
+    };
+ 
     return (
-        <AuthContext.Provider value={{ authData, setAuthData }}>
+        <AuthContext.Provider value={{ authState, updateAuthState }}>
             {children}
         </AuthContext.Provider>
     );

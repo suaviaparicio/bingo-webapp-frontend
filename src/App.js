@@ -5,11 +5,11 @@ import { AuthProvider } from './AuthContext';
 import './assets/css/style.css';
 
 const App = () => (
-  // <AuthProvider>
+  <AuthProvider>
     <Router>
       <AppRoutes />
     </Router>
-  // </AuthProvider>
+  </AuthProvider>
 );
 
 export default App;
